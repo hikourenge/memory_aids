@@ -1,6 +1,6 @@
 # README
 
-##　サービス概要
+## サービス概要
 利用者が“オリジナルクイズカード”を作成・配布できる Web アプリ。画像とテキストを自由に設定し、自由にオリジナルのカードを作成できるだけでなく、他者が作ったカードを検索・利用することで様々な知識を楽しみながら学ぶことを目指します。
 
 ## このサービスへの思い・作りたい理由
@@ -69,3 +69,6 @@
   * Devise
   * kaminari
   * ransack
+
+## 画面遷移図
+Figma：https://www.figma.com/design/k7wFLzd6WWu790WWYMEp60/memory_aids?node-id=0-1&p=f&t=LsaRBP70p9k5QZst-0
