@@ -74,4 +74,4 @@
 Figma：https://www.figma.com/design/k7wFLzd6WWu790WWYMEp60/memory_aids?node-id=0-1&p=f&t=LsaRBP70p9k5QZst-0
 
 ## ER図
- Gyazo：https://gyazo.com/a5b0df199a9f0eef61d5fc3237eea85d
+ Gyazo：https://gyazo.com/25966d8a6ac3ef39f61f77c64498a5d1
