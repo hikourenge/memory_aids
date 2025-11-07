@@ -49,7 +49,7 @@
 **学習者**
 1. 共有リンク or デッキ一覧（公開デッキのみ）から学習する内容を選択
 2. タイトル、タグによる検索機能
-3. モード選択（MVPは「暗記練習」のみ）
+3. モード選択（MVPは「暗記練習学習」のみ）
 4. 1問ずつ表示 → 「解答を見る」→「正誤を自己申告」→ 次へ
 5. 結果画面：正答率・所要時間の表示、デッキ一覧へ戻る
 
@@ -69,3 +69,10 @@
   * Devise
   * kaminari
   * ransack
+
+## 画面遷移図
+Figma：https://www.figma.com/design/k7wFLzd6WWu790WWYMEp60/memory_aids?node-id=0-1&p=f&t=LsaRBP70p9k5QZst-0
+
+## ER図
+ Gyazo：https://gyazo.com/25966d8a6ac3ef39f61f77c64498a5d1
+
