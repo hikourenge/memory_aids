@@ -5,16 +5,24 @@
         </div>
         <div>
             <ul class="md:flex md:justify-end md:items-center">
-                <li class="border-b-1 border-white md:border-none md:mx-2">
+                <% if user_signed_in? %>
+                <li>
+                    <div class="text-center my-4 border-b-1 border-white md:border-none md:mx-2">
+                        <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "px-8 py-2 bg-gray-300 hover:bg-blue-200 rounded inline-block"  %>
+                    </div>
+                </li>
+                <% else %>
+                <li class="md:mx-2">
                     <div class="text-center my-4">
-                        <a href = "#" class="px-8 py-2 my-4 bg-gray-300 hover:bg-blue-200 rounded">新規登録</a>
+                        <%= link_to "新規登録", new_user_registration_path, class: "px-8 py-2 bg-gray-300 hover:bg-blue-200 rounded inline-block" %>
                     </div>
                 </li>
                 <li class="md:mx-2">
                     <div class="text-center my-4">
-                        <a href = "#" class="px-8 py-2 my-4 bg-gray-300 hover:bg-blue-200 rounded">ログイン</a>
+                        <%= link_to "ログイン", new_user_session_path, class: "px-8 py-2 bg-gray-300 hover:bg-blue-200 rounded inline-block" %>
                     </div>
                 </li>
+                <% end %>
             </ul>
         </div>
     </header>
