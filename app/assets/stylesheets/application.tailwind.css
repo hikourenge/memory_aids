@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+.alert-notice {
+    background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
+    color: rgb(20 83 45 / var(--tw-text-opacity, 1));
+    text-align: center;
+    border-color: rgb(74 222 128 / var(--tw-border-opacity, 1));
+}
+.alert-alert {
+    background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
+    color: rgb(153 27 27 / var(--tw-text-opacity, 1));
+    text-align: center;
+    border-color: rgb(248 113 113 / var(--tw-border-opacity, 1));
+}
