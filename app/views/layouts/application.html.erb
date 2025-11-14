@@ -23,7 +23,11 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
+    <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
     <main class="container mx-auto mt-2 px-5 flex">
       <%= yield %>
     </main>
