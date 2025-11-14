@@ -1,0 +1,21 @@
+<div class=" bg-green-200 sticky top-0">
+    <header class="container mx-auto pb-1">
+        <div class = "flex justify-between items-center">
+            <%= link_to "Memory_aids",root_path, class: "text-4xl font-semibold" %>
+        </div>
+        <div>
+            <ul class="md:flex md:justify-end md:items-center">
+                <li class="md:mx-2">
+                    <div class="text-center my-4">
+                        <%= link_to t('header.sign_up'), new_user_registration_path, class: "px-8 py-2 bg-gray-300 hover:bg-blue-200 rounded inline-block" %>
+                    </div>
+                </li>
+                <li class="md:mx-2">
+                    <div class="text-center my-4">
+                        <%= link_to t('header.sign_in'), new_user_session_path, class: "px-8 py-2 bg-gray-300 hover:bg-blue-200 rounded inline-block" %>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+</div>
