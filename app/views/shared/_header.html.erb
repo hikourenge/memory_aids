@@ -7,6 +7,16 @@
             <ul class="md:flex md:justify-end md:items-center">
                 <li>
                     <div class="text-center my-4 border-b-1 border-white md:border-none md:mx-2">
+                        <%= link_to "作成したデッキ", my_decks_decks_path %>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center my-4 border-b-1 border-white md:border-none md:mx-2">
+                        <%= link_to t('header.deck_index'), decks_path %>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center my-4 border-b-1 border-white md:border-none md:mx-2">
                         <%= link_to t('header.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "px-8 py-2 bg-gray-300 hover:bg-blue-200 rounded inline-block"  %>
                     </div>
                 </li>

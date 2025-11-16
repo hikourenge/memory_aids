@@ -71,3 +71,5 @@ gem "devise"
 gem "rails-i18n", "~> 8.0.0"
 
 gem "devise-i18n"
+
+gem "rails_heroicon"
