@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
-  resources :decks, only: %i[index] do
+  resources :decks, only: %i[index new create] do
     collection do
       get :my_decks
     end
