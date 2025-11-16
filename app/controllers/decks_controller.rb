@@ -16,17 +16,16 @@ class DecksController < ApplicationController
     def create
         @deck = current_user.decks.build(deck_params)
         if @deck.save
-          redirect_to my_decks_decks_path, notice: t('decks.create.notice')
+          redirect_to my_decks_decks_path, notice: t("decks.create.notice")
         else
-          flash.now[:alert] = t('decks.create.alert') 
+          flash.now[:alert] = t("decks.create.alert")
           render :new, status: :unprocessable_entity
         end
       end
 
     private
-    
+
     def deck_params
         params.require(:deck).permit(:title, :description, :status)
       end
-
 end
