@@ -4,8 +4,14 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  title: "テストデッキ1"
+  description: "テスト用のデッキ1です。"
+  status: published   # enum のキーで書いてOK（Railsが整数に変換）
+  user: one           # test/fixtures/users.yml の one を指す
+
+two:
+  title: "テストデッキ2"
+  description: "テスト用のデッキ2です。"
+  status: hidden
+  user: one
