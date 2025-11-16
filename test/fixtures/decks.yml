@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  title: "テストデッキ1"
+  description: "テスト用のデッキ1です。"
+  status: published   # enum のキーで書いてOK（Railsが整数に変換）
+  user: one           # test/fixtures/users.yml の one を指す
+
+two:
+  title: "テストデッキ2"
+  description: "テスト用のデッキ2です。"
+  status: hidden
+  user: one
