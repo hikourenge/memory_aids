@@ -11,5 +11,5 @@ ja:
         password_confirmation: パスワード確認
       deck:
         title: タイトル
-        description: 説明
+        description: 説明文
         status: 公開設定

@@ -4,6 +4,7 @@
   </h1>
 
   <%= form_with model: @deck, local: true, class: "space-y-5" do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
     <div>
       <%= f.label :title, class: "mb-1 block text-sm font-medium text-gray-700" %>
       <%= f.text_field :title,
