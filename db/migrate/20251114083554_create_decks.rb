@@ -3,7 +3,7 @@ class CreateDecks < ActiveRecord::Migration[8.0]
     create_table :decks do |t|
       t.string :title, null: false
       t.string :description, null: false
-      t.integer :is_public? ,default: 0, null: false
+      t.integer :is_public?, default: 0, null: false
       t.references :user, foreign_key: true
 
       t.timestamps
