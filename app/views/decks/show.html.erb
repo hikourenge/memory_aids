@@ -45,20 +45,21 @@
 
           <!-- 編集・削除ボタン -->
           <div class="mt-2 flex justify-end gap-2">
+          <% if user_signed_in? && current_user.own?(@deck) %>
             <%= link_to edit_deck_path(@deck),
                   id: "button-edit-#{@deck.id}",
                   class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
-              <i class="bi bi-pencil-fill mr-1"></i>
+              <%= heroicon "pencil-square", variant: "solid", class: "h-4 w-4 text-gray-600" %>
               編集
             <% end %>
 
             <%= link_to deck_path(@deck),
                   id: "button-delete-#{@deck.id}",
-                  method: :delete,
-                  data: { turbo_confirm: "本当に削除しますか？" },
+                  data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
                   class: "inline-flex items-center rounded-md border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" do %>
-              <i class="bi bi-trash-fill mr-1"></i>
+               <%= heroicon "trash", variant: "solid", class: "h-4 w-4 text-gray-600" %>
               削除
+            <% end %>
             <% end %>
           </div>
         </div>

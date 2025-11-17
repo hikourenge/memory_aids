@@ -6,4 +6,8 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 50 }
 
   has_many :decks, dependent: :destroy
+
+  def own?(object)
+    id == object&.user_id
+  end
 end

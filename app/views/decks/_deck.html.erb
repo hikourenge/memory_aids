@@ -8,13 +8,15 @@
         <%= link_to deck.title, deck_path(deck), class: "hover:underline" %>
       </h4>
 
+      <% if user_signed_in? && current_user.own?(deck) %>
       <div class="ml-auto flex items-center gap-2 text-gray-400">
-        <%= link_to '#',
+        <%= link_to edit_deck_path(deck),
               id: "button-edit-#{deck.id}",
               class: "inline-flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100" do %>
           <%= heroicon "pencil-square", variant: "solid", class: "h-4 w-4 text-gray-600" %>
         <% end %>
       </div>
+      <% end %>
     </div>
 
     <ul class="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500">

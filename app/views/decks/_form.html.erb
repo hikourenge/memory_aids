@@ -1,0 +1,48 @@
+<%= form_with model: @deck, local: true, class: "space-y-5" do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+    <div>
+      <%= f.label :title, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :title,
+            class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                    focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+    </div>
+    <div>
+      <%= f.label :description, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :description,
+            rows: 10,
+            class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                    focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+    </div>
+
+    <div>
+      <%= f.label :deck_image, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.file_field :deck_image,  accept: 'image/*',
+            class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer file:mr-4 file:rounded-md file:border-0
+                file:bg-gray-200 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300" %>
+      <%= f.hidden_field :deck_image_cache %>
+    </div>
+
+    <div>
+      <%= f.label :status, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.select :status,
+            options_for_select(
+              [
+                ["非公開",  "hidden"],
+                ["公開",    "published"]
+              ],
+              @deck.status || "hidden"
+            ),
+            {},
+            class: "block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm
+                    focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+      <p class="mt-1 text-xs text-gray-500">
+        非公開: 自分だけが見られるデッキ / 公開: 他のユーザーにも表示されるデッキ
+      </p>
+    </div>
+
+    <div>
+      <%= f.submit t('.submit', default: "保存"),
+            class: "inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white
+                    hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    </div>
+  <% end %>
