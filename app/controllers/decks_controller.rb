@@ -13,6 +13,11 @@ class DecksController < ApplicationController
         @deck = Deck.new
     end
 
+    def show
+        @deck = Deck.find(params[:id])
+      end
+      
+
     def create
         @deck = current_user.decks.build(deck_params)
         if @deck.save

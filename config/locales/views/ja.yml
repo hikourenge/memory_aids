@@ -8,7 +8,9 @@ ja:
   decks:
     new:
       title: 新規デッキ作成
-      
     create:
       notice: デッキを作成しました
       alert: デッキの作成に失敗しました
+    show:
+      title: デッキ詳細
+      description: 説明文
