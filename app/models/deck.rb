@@ -4,5 +4,7 @@ class Deck < ApplicationRecord
 
     enum :status, { hidden: 0, published: 1 }, prefix: true
 
+    mount_uploader :deck_image, DeckImageUploader
+
     belongs_to :user
 end

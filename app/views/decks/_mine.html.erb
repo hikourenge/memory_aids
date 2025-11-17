@@ -15,20 +15,17 @@
               <tr class="hover:bg-gray-50">
                 <!-- サムネイル -->
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <%= image_tag "no_image.jpg", alt: deck.title, class: "h-12 w-20 object-cover rounded" %>
+                  <%= image_tag deck.deck_image_url, alt: deck.title, class: "h-12 w-20 object-cover rounded", width:"300", height: "200" %>
                 </td>
 
-                <!-- タイトル -->
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                   <%= deck.title %>
                 </td>
 
-                <!-- 説明（先頭50文字だけ表示） -->
                 <td class="px-6 py-4 text-sm text-gray-800">
                   <%= truncate(deck.description, length: 50) %>
                 </td>
 
-                <!-- ステータス（badge風） -->
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <% if deck.status_published? %>
                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">
@@ -41,7 +38,6 @@
                   <% end %>
                 </td>
 
-                <!-- 操作（編集・削除） -->
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                   <%= link_to "編集", "#", class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-hidden focus:text-blue-800" %>
 
