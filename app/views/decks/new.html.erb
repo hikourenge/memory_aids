@@ -20,6 +20,14 @@
     </div>
 
     <div>
+      <%= f.label :deck_image, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.file_field :deck_image,  accept: 'image/*',
+            class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer file:mr-4 file:rounded-md file:border-0
+                file:bg-gray-200 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300" %>
+      <%= f.hidden_field :deck_image_cache %>
+    </div>
+
+    <div>
       <%= f.label :status, class: "mb-1 block text-sm font-medium text-gray-700" %>
       <%= f.select :status,
             options_for_select(

@@ -26,6 +26,6 @@ class DecksController < ApplicationController
     private
 
     def deck_params
-        params.require(:deck).permit(:title, :description, :status)
+        params.require(:deck).permit(:title, :description, :status, :deck_image, :deck_image_cache)
       end
 end
