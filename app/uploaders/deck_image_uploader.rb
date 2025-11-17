@@ -19,7 +19,7 @@ class DeckImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    'no_image.jpg'
+    "no_image.jpg"
   end
 
 

@@ -74,4 +74,4 @@ gem "devise-i18n"
 
 gem "rails_heroicon"
 
-gem 'carrierwave', '~> 3.0'
+gem "carrierwave", "~> 3.0"
