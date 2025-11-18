@@ -5,10 +5,22 @@ ja:
     sign_out: ログアウト
     deck_index: デッキ一覧
     my_decks: 作成したデッキ
+  defaults:
+    edit: 編集
   decks:
     new:
       title: 新規デッキ作成
-      
     create:
       notice: デッキを作成しました
       alert: デッキの作成に失敗しました
+    show:
+      title: デッキ詳細
+      description: 説明文
+    edit:
+      title: デッキ編集
+    update:
+      notice: デッキを更新しました
+      alert: デッキの更新に失敗しました
+    delete:
+      notice: デッキを削除しました
+      alert: デッキの削除に失敗しました

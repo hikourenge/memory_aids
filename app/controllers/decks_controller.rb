@@ -13,19 +13,43 @@ class DecksController < ApplicationController
         @deck = Deck.new
     end
 
+    def show
+        @deck = Deck.find(params[:id])
+      end
+
+      def edit
+        @deck = current_user.decks.find(params[:id])
+      end
+
+      def update
+        @deck = current_user.decks.find(params[:id])
+        if @deck.update(deck_params)
+          redirect_to deck_path(@deck), notice: t("decks.update.notice")
+        else
+          flash.now[:alert] = t("decks.update.alert")
+          render :edit, status: :unprocessable_entity
+        end
+      end
+
     def create
         @deck = current_user.decks.build(deck_params)
         if @deck.save
-          redirect_to my_decks_decks_path, notice: t("decks.create.notice")
+          redirect_to deck_path(@deck), notice: t("decks.create.notice")
         else
           flash.now[:alert] = t("decks.create.alert")
           render :new, status: :unprocessable_entity
         end
       end
 
+      def destroy
+        deck = current_user.decks.find(params[:id])
+        deck.destroy!
+        redirect_to my_decks_decks_path, notice: t("decks.delete.notice"), status: :see_other
+      end
+
     private
 
     def deck_params
         params.require(:deck).permit(:title, :description, :status, :deck_image, :deck_image_cache)
-      end
+    end
 end

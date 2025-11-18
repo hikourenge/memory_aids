@@ -14,3 +14,6 @@ ja:
         description: 説明文
         status: 公開設定
         deck_image: サムネイル
+      status:
+        published: 公開
+        hidden: 非公開
