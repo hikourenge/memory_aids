@@ -43,8 +43,8 @@
           </ul>
 
           <!-- 編集・削除ボタン -->
+        <% if user_signed_in? && current_user.own?(@deck) %>
           <div class="mt-2 flex justify-end gap-2">
-          <% if user_signed_in? && current_user.own?(@deck) %>
             <%= link_to edit_deck_path(@deck),
                   id: "button-edit-#{@deck.id}",
                   class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
@@ -59,19 +59,18 @@
                <%= heroicon "trash", variant: "solid", class: "h-4 w-4 text-gray-600" %>
               削除
             <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-       <div class="mt-6 border-t pt-4">
-        <div class="text-sm font-semibold text-gray-700 mb-1">
-          共有用URL
-        </div>
-        <div class="text-xs text-gray-700">
-          <div class="rounded-md border border-gray-300 bg-gray-50 px-3 py-2 break-all font-mono">
-            <%= deck_url(@deck) %>
-          </div>
+             </div>
+                <div class="mt-6 border-t pt-4">
+                    <div class="text-sm font-semibold text-gray-700 mb-1">
+                    共有用URL
+                    </div>
+                    <div class="text-xs text-gray-700">
+                        <div class="rounded-md border border-gray-300 bg-gray-50 px-3 py-2 break-all font-mono">
+                            <%= deck_url(@deck) %>
+                        </div>
+                    </div>
+                </div>
+             <% end %>
         </div>
       </div>
 
