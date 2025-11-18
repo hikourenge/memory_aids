@@ -16,7 +16,7 @@ class DecksController < ApplicationController
     def show
         @deck = Deck.find(params[:id])
       end
-    
+
       def edit
         @deck = current_user.decks.find(params[:id])
       end
@@ -34,7 +34,7 @@ class DecksController < ApplicationController
     def create
         @deck = current_user.decks.build(deck_params)
         if @deck.save
-          redirect_to my_decks_decks_path, notice: t("decks.create.notice")
+          redirect_to deck_path(@deck), notice: t("decks.create.notice")
         else
           flash.now[:alert] = t("decks.create.alert")
           render :new, status: :unprocessable_entity
