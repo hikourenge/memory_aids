@@ -7,4 +7,5 @@ class Deck < ApplicationRecord
     mount_uploader :deck_image, DeckImageUploader
 
     belongs_to :user
+    has_many :cards, dependent: :destroy
 end

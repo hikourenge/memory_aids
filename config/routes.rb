@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   resources :decks do
+    resources :cards, shallow: true 
     collection do
       get :my_decks
     end

@@ -1,0 +1,26 @@
+<%= form_with model: [@deck, @card], local: true, class: "space-y-5" do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+    <div>
+      <%= f.label :question, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :question,
+            class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                    focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+    </div>
+    <div>
+      <%= f.label :answer, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :answer,
+            class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
+                    focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+    </div>
+
+    <div>
+        <%= f.label :position, "並び順" %>
+        <%= f.number_field :position, min: 1, step: 1 %>
+    </div>
+
+    <div>
+      <%= f.submit t('.submit', default: "保存"),
+            class: "inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white
+                    hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    </div>
+  <% end %>
