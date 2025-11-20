@@ -89,12 +89,13 @@
           <%= t('.card.index') %>
         </div>
         <div class="text-gray-800 leading-relaxed text-sm">
-          <%= render 'cards/card', cards:@cards, deck: @deck %>
+          <%= render partial: 'cards/card', collection: @cards, as: :card %>
           <%= link_to new_deck_card_path(@deck),
                   class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
               カード登録
             <% end %>
         </div>
+        <%= link_to "カード一覧へ", deck_cards_path(@deck) %>
       </div>
     </div>
   </article>

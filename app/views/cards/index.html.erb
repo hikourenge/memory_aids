@@ -1,0 +1,17 @@
+<div class="mx-auto max-w-5xl px-4 pt-6">
+    <h2 class = "text-2xl" ><%= @deck.title %>のカード一覧</h2>
+
+  <!-- デッキ一覧 -->
+  <div>
+    <% if @cards.present? %>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <%= render partial: 'card', collection: @cards %>
+        </div>
+    <% else %>
+        <div class="mb-3">カードがありません</div>
+    <% end %>
+</div>
+     <%= link_to "デッキ詳細へ戻る", deck_path(@deck) %>
+    </div>
+  </div>
+</div>
