@@ -1,21 +1,42 @@
+<%# deck/showの時にpreview ローカル変数が渡されていない場合は false 扱いにする %>
+<% preview = local_assigns[:preview] || false %>
+
 <div id="card-id-<%= card.id %>"
     class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
 
   <div class="p-4">
     <div class="mb-2 flex items-start">
       <h4 class="text-base font-semibold leading-tight text-gray-900">
-        <%= link_to card.question, card_path(card), class: "hover:underline" %>
+       <% if preview %>
+          <%# プレビュー時：クリックしたらカード一覧へ飛ばす %>
+          <%= link_to deck_cards_path(deck), class: "hover:underline" do %>
+            <%= card.question %>
+          <% end %>
+        <% else %>
+         <%# 通常時（cards/index など）：カード詳細へ %>
+        <%= link_to card.question, deck_card_path(deck, card), class: "hover:underline" %>
+        <% end %>
       </h4>
-
+    <%# 編集・削除ボタンは preview のときは表示しない %>
+      <% unless preview %>
       <% if user_signed_in? && current_user.own?(card) %>
       <div class="ml-auto flex items-center gap-2 text-gray-400">
-        <%= link_to edit_card_path(card),
+        <%= link_to edit_deck_card_path(deck, card),
               id: "button-edit-#{card.id}",
               class: "inline-flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100" do %>
           <%= heroicon "pencil-square", variant: "solid", class: "h-4 w-4 text-gray-600" %>
         <% end %>
       </div>
+        <div class="ml-auto flex items-center gap-2 text-red-400">
+        <%= link_to deck_card_path(deck, card),
+              id: "button-delete-#{card.id}",
+              data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                  class: "inline-flex items-center rounded-md px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" do %>
+          <%= heroicon "trash", variant: "solid", class: "h-4 w-4 text-red-600" %>
+        <% end %>
+      </div>
       <% end %>
+    <% end %>
     </div>
   </div>
 </div>
