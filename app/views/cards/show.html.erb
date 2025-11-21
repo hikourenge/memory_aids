@@ -37,6 +37,11 @@
       </div>
       </div>
 
+        <% if @card.card_image? %>
+            <%= image_tag @card.card_image.url, class: "h-40 w-full object-cover",loading: "lazy" %>
+        <% end %>
+
+
       <!-- 答え -->
       <div class="mt-6 border-t pt-4">
         <div class="text-sm font-semibold text-gray-700 mb-1">
@@ -50,6 +55,23 @@
 
     </div>
   </article>
-
-      <%= link_to "カード一覧へ", deck_cards_path(@deck) %>
+    <div class="mt-6 flex items-center justify-between">
+        <% if @prev_card.present? %>
+            <%= link_to deck_card_path(@deck, @prev_card),
+                class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
+            ← 前のカード
+            <% end %>
+        <% else %>
+            <div></div> <%# 左側の空白確保（レイアウト崩れ防止） %>
+        <% end %>
+        <%= link_to "カード一覧へ", deck_cards_path(@deck) %>
+        <% if @next_card.present? %>
+        <%= link_to deck_card_path(@deck, @next_card),
+            class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
+            次のカード →
+        <% end %>
+        <% else %>
+            <div></div>
+        <% end %>
+    </div>
 </div>
