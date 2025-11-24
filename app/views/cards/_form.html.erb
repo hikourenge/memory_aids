@@ -2,20 +2,39 @@
       <%= render 'shared/error_messages', object: f.object %>
     <div>
       <%= f.label :question, class: "mb-1 block text-sm font-medium text-gray-700" %>
-      <%= f.text_field :question,
+      <%= f.text_area :question, rows: 5,
             class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                     focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
     </div>
     <div>
       <%= f.label :answer, class: "mb-1 block text-sm font-medium text-gray-700" %>
-      <%= f.text_field :answer,
+      <%= f.text_area :answer,
             class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm
                     focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
     </div>
 
     <div>
-        <%= f.label :position, "並び順" %>
-        <%= f.number_field :position, min: 1, step: 1 %>
+        <%= f.label :position, "並び順", class: "mb-1 block text-sm font-medium text-gray-700" %>
+        <%= f.number_field :position, min: 1, step: 1, readonly: true,
+            class: "block w-32 rounded-md border border-gray-300 bg-gray-100 px-3 py-2 text-sm text-gray-700 shadow-sm
+                    focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+    </div>
+
+        <div>
+      <%= f.label :card_image, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <% if @card&.card_image? %>
+      <div class="mb-2">
+        <p class="mb-1 text-xs text-gray-500">現在の画像</p>
+        <%= image_tag @card.card_image.url,
+                class: "h-32 w-32 rounded-md border border-gray-200 object-cover bg-gray-50" %>
+        </div>
+       <% else %>
+        <p class="mb-2 text-xs text-gray-500">登録されている画像はありません</p>
+       <% end %>
+      <%= f.file_field :card_image,  accept: 'image/*',
+            class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer file:mr-4 file:rounded-md file:border-0
+                file:bg-gray-200 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300" %>
+      <%= f.hidden_field :card_image_cache %>
     </div>
 
     <div>

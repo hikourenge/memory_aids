@@ -1,4 +1,4 @@
-<div class="max-w-5xl mx-auto px-4 py-8">
+<div class="mx-auto max-w-5xl px-4 py-8">
   <div class="mb-6">
     <h1 class="text-2xl font-bold text-gray-900">
       <%= t('.title') %>
@@ -6,50 +6,77 @@
   </div>
 
   <article class="rounded-lg bg-white shadow">
-    <div class="p-6">
-      <div class="flex flex-col gap-6 md:flex-row">
-        <div class="flex-1 space-y-2">
-          <div class="flex flex-wrap items-start gap-2">
-            <h3 class="text-xl font-semibold text-gray-900">
-              <%= @card.question %>
-            </h3>
-          <!-- 編集・削除ボタン -->
-        <div>
+    <div class="p-6 space-y-6">
+      
+      <!-- ① question -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-900 leading-relaxed break-words md:min-w-[50ch]">
+          <%= @card.question %>
+        </h3>
+
+        <!-- ② 編集・削除（所有者のみ） -->
         <% if user_signed_in? && current_user.own?(@card) %>
-          <div class="mt-2 flex justify-end gap-2">
+          <div class="mt-3 flex justify-end gap-2">
             <%= link_to edit_deck_card_path(@deck, @card),
                   id: "button-edit-#{@card.id}",
                   class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
-              <%= heroicon "pencil-square", variant: "solid", class: "h-4 w-4 text-gray-600" %>
+              <%= heroicon "pencil-square", variant: "solid", class: "mr-1 h-4 w-4 text-gray-600" %>
               編集
             <% end %>
 
-            <%= link_to deck_card_path(@deck,@card),
+            <%= link_to deck_card_path(@deck, @card),
                   id: "button-delete-#{@card.id}",
                   data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
                   class: "inline-flex items-center rounded-md border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" do %>
-               <%= heroicon "trash", variant: "solid", class: "h-4 w-4 text-gray-600" %>
+              <%= heroicon "trash", variant: "solid", class: "mr-1 h-4 w-4 text-red-600" %>
               削除
             <% end %>
-             </div>
-             <% end %>
-        </div>
-      </div>
+          </div>
+        <% end %>
       </div>
 
-      <!-- 答え -->
-      <div class="mt-6 border-t pt-4">
-        <div class="text-sm font-semibold text-gray-700 mb-1">
+      <!-- ③ 画像 -->
+      <% if @card.card_image? %>
+        <div class="overflow-hidden rounded-lg border border-gray-200">
+          <%= image_tag @card.card_image.url,
+                class: "w-full max-h-[420px] object-contain bg-gray-50",
+                loading: "lazy" %>
+        </div>
+      <% end %>
+
+      <!-- ④ answer -->
+      <div class="border-t pt-4">
+        <div class="mb-1 text-xl font-semibold text-red-500">
           <%= t('.answer') %>
         </div>
-        <div class="text-gray-800 leading-relaxed text-sm">
-          <%= @card.answer%>
+        <div class="text-xl font-semibold text-gray-900 leading-relaxed break-words">
+            <%= @card.answer %>
         </div>
       </div>
-      
 
     </div>
   </article>
 
-      <%= link_to "カード一覧へ", deck_cards_path(@deck) %>
+  <!-- 前後ナビ（ここは既存のまま残しています） -->
+  <div class="mt-6 flex items-center justify-between">
+    <% if @prev_card.present? %>
+      <%= link_to deck_card_path(@deck, @prev_card),
+            class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
+        ← 前のカード
+      <% end %>
+    <% else %>
+      <div></div>
+    <% end %>
+
+    <%= link_to "カード一覧へ", deck_cards_path(@deck), class: "text-sm text-blue-600 hover:underline" %>
+
+    <% if @next_card.present? %>
+      <%= link_to deck_card_path(@deck, @next_card),
+            class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
+        次のカード →
+      <% end %>
+    <% else %>
+      <div></div>
+    <% end %>
+  </div>
 </div>

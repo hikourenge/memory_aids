@@ -5,12 +5,13 @@ class CardsController < ApplicationController
 
     def index
         @deck = Deck.find(params[:deck_id])
-        @cards = @deck.cards.includes(:user)
+        @cards = @deck.cards.includes(:user).order(position: :asc)
     end
 
     def new
         @card = @deck.cards.build
         @card.user = current_user
+        @card.position = @deck.cards.maximum(:position).to_i + 1
     end
 
 
@@ -28,6 +29,18 @@ class CardsController < ApplicationController
       def show
         @deck = Deck.find(params[:deck_id])
         @card = @deck.cards.find(params[:id])
+
+            @prev_card = @deck.cards
+            .where("position < ? OR (position = ? AND id < ?)",
+                @card.position, @card.position, @card.id)
+            .order(position: :desc, id: :desc)
+            .first
+
+            @next_card = @deck.cards
+            .where("position > ? OR (position = ? AND id > ?)",
+                @card.position, @card.position, @card.id)
+            .order(position: :asc, id: :asc)
+            .first
       end
 
       def edit
@@ -57,7 +70,7 @@ class CardsController < ApplicationController
   end
 
       def card_params
-        params.require(:card).permit(:question, :answer, :position,)
+        params.require(:card).permit(:question, :answer, :position, :card_image, :card_image_cache)
       end
 
       def set_card_for_owner

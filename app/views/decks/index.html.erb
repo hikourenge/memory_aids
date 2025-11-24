@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-5xl px-4 pt-6">
+<div class="mx-auto max-w-6xl px-4 pt-6">
     <h2 class = "text-2xl" >デッキ一覧</h2>
     <!-- 検索フォーム -->
     <div class="mb-6 my-2">
@@ -20,7 +20,7 @@
   <!-- デッキ一覧 -->
   <div>
     <% if @decks.present? %>
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <%= render partial: 'deck', collection: @decks %>
         </div>
     <% else %>

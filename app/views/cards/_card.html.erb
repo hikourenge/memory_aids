@@ -3,14 +3,13 @@
 
 <div id="card-id-<%= card.id %>"
     class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-
   <div class="p-4">
     <div class="mb-2 flex items-start">
       <h4 class="text-base font-semibold leading-tight text-gray-900">
        <% if preview %>
           <%# プレビュー時：クリックしたらカード一覧へ飛ばす %>
           <%= link_to deck_cards_path(deck), class: "hover:underline" do %>
-            <%= card.question %>
+            <%= truncate(card.question, length: 50) %>
           <% end %>
         <% else %>
          <%# 通常時（cards/index など）：カード詳細へ %>
@@ -38,5 +37,9 @@
       <% end %>
     <% end %>
     </div>
+     <% if card.card_image? && !preview %>
+    <%= image_tag card.card_image.url, class: "h-40 w-full object-cover", loading: "lazy" %>
+  <% end %>
+
   </div>
 </div>
