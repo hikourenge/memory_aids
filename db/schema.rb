@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_24_061600) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_24_075638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -39,6 +39,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_24_061600) do
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
+  create_table "hints", force: :cascade do |t|
+    t.bigint "card_id"
+    t.text "content", null: false
+    t.integer "hint_position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_hints_on_card_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,4 +65,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_24_061600) do
   add_foreign_key "cards", "decks"
   add_foreign_key "cards", "users"
   add_foreign_key "decks", "users"
+  add_foreign_key "hints", "cards"
 end

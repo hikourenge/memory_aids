@@ -6,5 +6,7 @@ class Card < ApplicationRecord
     belongs_to :user
     belongs_to :deck
 
+    has_many :hints, dependent: :destroy
+
     mount_uploader :card_image, CardImageUploader
 end

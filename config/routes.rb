@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   resources :decks do
-    resources :cards
+    resources :cards do
+      resources :hints, only: %i[create edit destroy]
+    end
     collection do
       get :my_decks
     end
