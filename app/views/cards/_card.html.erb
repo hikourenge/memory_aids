@@ -9,7 +9,7 @@
        <% if preview %>
           <%# プレビュー時：クリックしたらカード一覧へ飛ばす %>
           <%= link_to deck_cards_path(deck), class: "hover:underline" do %>
-            <%= card.question %>
+            <%= truncate(card.question, length: 50) %>
           <% end %>
         <% else %>
          <%# 通常時（cards/index など）：カード詳細へ %>
@@ -37,7 +37,7 @@
       <% end %>
     <% end %>
     </div>
-     <% if card.card_image? %>
+     <% if card.card_image? && !preview %>
     <%= image_tag card.card_image.url, class: "h-40 w-full object-cover", loading: "lazy" %>
   <% end %>
 

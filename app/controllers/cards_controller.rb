@@ -5,12 +5,13 @@ class CardsController < ApplicationController
 
     def index
         @deck = Deck.find(params[:deck_id])
-        @cards = @deck.cards.includes(:user)
+        @cards = @deck.cards.includes(:user).order(position: :asc)
     end
 
     def new
         @card = @deck.cards.build
         @card.user = current_user
+        @card.position = @deck.cards.maximum(:position).to_i + 1
     end
 
 

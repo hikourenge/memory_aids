@@ -15,7 +15,7 @@ class DecksController < ApplicationController
 
     def show
         @deck = Deck.find(params[:id])
-        @cards = @deck.cards.includes(:user).limit(3)
+        @cards = @deck.cards.includes(:user).order(position: :asc).limit(3)
       end
 
       def edit

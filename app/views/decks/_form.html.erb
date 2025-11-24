@@ -16,6 +16,15 @@
 
     <div>
       <%= f.label :deck_image, class: "mb-1 block text-sm font-medium text-gray-700" %>
+      <% if @deck&.deck_image? %>
+          <div class="mb-2">
+            <%= image_tag @deck.deck_image.url,
+                  class: "h-32 w-32 rounded-md border border-gray-200 object-cover bg-gray-50" %>
+          </div>
+        <% else %>
+          <p class="mb-2 text-xs text-gray-500">登録されている画像はありません</p>
+        <% end %>
+
       <%= f.file_field :deck_image,  accept: 'image/*',
             class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer file:mr-4 file:rounded-md file:border-0
                 file:bg-gray-200 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300" %>
