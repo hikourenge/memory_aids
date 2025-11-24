@@ -29,6 +29,8 @@ class CardsController < ApplicationController
       def show
         @deck = Deck.find(params[:deck_id])
         @card = @deck.cards.find(params[:id])
+        @hint = Hint.new
+        @hints = @card.hints.order(hint_position: :asc)
 
             @prev_card = @deck.cards
             .where("position < ? OR (position = ? AND id < ?)",
