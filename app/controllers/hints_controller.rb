@@ -13,11 +13,11 @@ class HintsController < ApplicationController
         respond_to do |format|
           if @hint.save
             format.turbo_stream
-            format.html { redirect_to deck_card_path(@deck, @card), notice: "ヒントを追加しました" }
+            format.html { redirect_to deck_card_path(@deck, @card) }
           else
             # フォームだけ差し替えてエラー表示
             format.turbo_stream do
-              render turbo_stream: turbo_stream.replace(
+              render turbo_stream: turbo_stream.update(
                 "hint_form",
                 partial: "hints/form",
                 locals: { hint: @hint, card: @card }
@@ -48,7 +48,7 @@ class HintsController < ApplicationController
       private
 
       def set_deck_and_card
-        @deck = Deck.find(params[:deck_id])
+        @deck = current_user.decks.find(params[:deck_id])
         @card = @deck.cards.find(params[:card_id])
       end
 

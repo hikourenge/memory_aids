@@ -39,11 +39,6 @@
                 new_deck_card_hint_path(@deck, @card),
                 data: { turbo_frame: "hint_form" },
                 class: "inline-flex items-center rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700" %>
-
-        <%= link_to "追加をやめる",
-                close_deck_card_hints_path(@deck, @card),
-                data: { turbo_frame: "hint_form" },
-                class: "inline-flex items-center rounded-lg bg-gray-200 px-3 py-1.5 text-sm font-semibold text-gray-700 hover:bg-gray-300" %>
         </div>
 
         <!-- フォーム表示用フレーム（所有者のみ表示） -->
