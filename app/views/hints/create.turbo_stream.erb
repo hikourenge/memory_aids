@@ -1,0 +1,7 @@
+  <%= turbo_stream.append "hints_list" do %>
+    <%= render partial: "hints/hint", locals: { hint: @hint } %>
+  <% end %>
+
+<%= turbo_stream.update "hint_form" do %>
+  <%= render partial: "hints/form", locals: { hint: Hint.new, card: @card } %>
+<% end %>
