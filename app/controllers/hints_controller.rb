@@ -1,6 +1,6 @@
 class HintsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_deck_and_card, only: %i[ new create edit destroy close ]
+    before_action :set_deck_and_card, only: %i[ new create edit destroy close update ]
 
     def new
         @hint = Hint.new
@@ -29,6 +29,35 @@ class HintsController < ApplicationController
       end
 
       def edit
+        @hint = @card.hints.find(params[:id])
+      end
+
+
+      def update
+        @hint = @card.hints.find(params[:id])
+
+        respond_to do |format|
+            if @hint.update(hint_params)
+              format.turbo_stream
+              format.html do
+                redirect_to deck_card_path(@deck, @card),
+                            notice: t("hints.update.notice", default: "ヒントを更新しました")
+                end
+            else
+              # バリデーションエラー時の Turbo（フォームだけ差し替え）
+              format.turbo_stream do
+                render turbo_stream: turbo_stream.update(
+                  "hint_form",
+                  partial: "hints/form",
+                  locals: { hint: @hint, card: @card }
+                )
+                end
+              format.html do
+                flash.now[:alert] = t("hints.update.alert", default: "ヒントを更新できませんでした")
+                render :edit, status: :unprocessable_entity
+                end
+            end
+        end
       end
 
       def destroy
