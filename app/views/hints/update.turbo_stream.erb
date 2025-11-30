@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "hint-#{@hint.id}" do %>
+  <%= render partial: "hints/hint", locals: { hint: @hint } %>
+<% end %>
+
+<%= turbo_stream.update "hint_form" do %>
+  <!-- 編集フォームを消す（空にする） -->
+<% end %>

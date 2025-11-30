@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
   resources :decks do
     resources :cards do
-      resources :hints, only: %i[ new create edit destroy ] do
+      resources :hints, only: %i[ new create edit destroy update ] do
         collection do
           get :close   # /decks/:deck_id/cards/:card_id/hints/close
         end
