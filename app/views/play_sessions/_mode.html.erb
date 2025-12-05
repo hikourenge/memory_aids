@@ -1,0 +1,25 @@
+<div class="my-4">
+  <%= form_with model: [@deck, PlaySession.new] do |f| %>
+    <div class="flex flex-wrap items-center gap-3">
+      <div>
+        <%= f.label :mode, "プレイモードを選択", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.select :mode,
+              options_for_select(
+                [
+                  ["練習", :practice],
+                  # 他のモードも同様に追加可能
+                ],
+                :practice # デフォルト選択
+              ),
+              {},
+              class: "mt-1 block w-40 rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            %>
+      </div>
+
+      <div class="mt-6 md:mt-8">
+        <%= f.submit "スタート",
+              class: "inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" %>
+      </div>
+    </div>
+  <% end %>
+</div>

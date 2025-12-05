@@ -4,15 +4,20 @@ class PlaySessionsController < ApplicationController
 
     # POST /decks/:deck_id/play_sessions
     def create
-        @play_session = PlaySession.create!(
-        deck:          @deck,
-        user:          user_signed_in? ? current_user : nil,
-        mode:          :practice,
-        started_at:    Time.current,
-        correct_count: 0
-        )
+        @play_session = @deck.play_sessions.new(play_session_params)
 
-        redirect_to deck_play_session_path(@deck, @play_session)
+        @play_session.user = user_signed_in? ? current_user : nil
+        @play_session.started_at = Time.current
+        @play_session.correct_count = 0
+
+        if @play_session.save
+            redirect_to deck_play_session_path(@deck, @play_session)
+        else
+            @cards = @deck.cards.order(:position)
+            flash.now[:alert] = "プレイを開始できませんでした。"
+            render "decks/show", status: :unprocessable_entity
+        end
+
     end
 
     # GET /decks/:deck_id/play_sessions/:id
@@ -65,6 +70,10 @@ class PlaySessionsController < ApplicationController
     end
 
     private
+
+    def play_session_params
+        params.require(:play_session).permit(:mode)
+    end
 
     def set_deck
         @deck = Deck.find(params[:deck_id])

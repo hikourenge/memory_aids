@@ -3,7 +3,7 @@ class PlaySession < ApplicationRecord
     belongs_to :deck
     has_many :card_sessions, dependent: :destroy
 
-    enum :mode, { practice: 0 }
+    enum :mode, { practice: 0, exam: 1 }
 
     # 全カード数
     def total_questions
