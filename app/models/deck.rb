@@ -8,4 +8,5 @@ class Deck < ApplicationRecord
 
     belongs_to :user
     has_many :cards, dependent: :destroy
+    has_many :play_sessions, dependent: :destroy
 end

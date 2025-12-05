@@ -1,0 +1,53 @@
+<!-- app/views/play_sessions/show.html.erb -->
+<div class="max-w-2xl mx-auto py-8">
+  <h1 class="text-2xl font-bold mb-4">
+    <%= @deck.title %> - 暗記練習
+  </h1>
+
+  <p class="text-sm text-gray-500 mb-4">
+    <%= @play_session.card_sessions.count + 1 %> / <%= @deck.cards.count %> 問目
+  </p>
+
+  <article class="rounded-lg bg-white shadow p-6">
+    <h2 class="text-lg font-semibold mb-2">問題</h2>
+    <p class="mb-4 whitespace-pre-wrap"><%= @card.question %></p>
+    <% if @card.card_image? %>
+      <%= image_tag @card.card_image.url, class: "h-40 w-full object-cover", loading: "lazy" %>
+    <% end %>
+    <% if @hints.present? %>
+    <h2 class="text-lg font-semibold mb-2">ヒント</h2>
+    <table class="min-w-full divide-y divide-gray-200">
+        <tbody id="hints_list" class="divide-y divide-gray-200 bg-white">
+       <%= render partial: "hints/hint", collection: @hints %>
+        </tbody>
+    </table>
+    <% end %>
+
+    <% if params[:show_answer] == "true" %>
+      <h3 class="text-lg font-semibold mb-2 mt-2">解答</h3>
+      <p class="mb-6 whitespace-pre-wrap"><%= @card.answer %></p>
+
+      <div class="flex gap-4">
+        <%= button_to "正解だった",
+                      answer_deck_play_session_path(@deck, @play_session,
+                                                   card_id: @card.id,
+                                                   is_correct: true),
+                      method: :patch,
+                      class: "flex-1 rounded-md bg-green-600 px-4 py-2 text-white" %>
+
+        <%= button_to "間違えた",
+                      answer_deck_play_session_path(@deck, @play_session,
+                                                   card_id: @card.id,
+                                                   is_correct: false),
+                      method: :patch,
+                      class: "flex-1 rounded-md bg-red-600 px-4 py-2 text-white" %>
+      </div>
+    <% else %>
+      <%= link_to "解答を見る",
+                  deck_play_session_path(@deck, @play_session,
+                                         card_id: @card.id,
+                                         show_answer: true),
+                  class: "inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 mt-4 text-white" %>
+    <% end %>
+  </article>
+</div>

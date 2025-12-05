@@ -14,6 +14,12 @@ Rails.application.routes.draw do
     collection do
       get :my_decks
     end
+    resources :play_sessions, only: %i[create show] do
+      member do
+        patch :answer   # 正誤の自己申告を送る
+        get   :result   # 結果画面
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
