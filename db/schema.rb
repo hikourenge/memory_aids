@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_24_075638) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_03_053930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "card_sessions", force: :cascade do |t|
+    t.bigint "play_session_id", null: false
+    t.bigint "card_id", null: false
+    t.boolean "is_correct", null: false
+    t.integer "duration_seconds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_card_sessions_on_card_id"
+    t.index ["play_session_id", "card_id"], name: "index_card_sessions_on_play_session_id_and_card_id", unique: true
+    t.index ["play_session_id"], name: "index_card_sessions_on_play_session_id"
+  end
 
   create_table "cards", force: :cascade do |t|
     t.bigint "user_id"
@@ -48,6 +60,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_24_075638) do
     t.index ["card_id"], name: "index_hints_on_card_id"
   end
 
+  create_table "play_sessions", force: :cascade do |t|
+    t.bigint "deck_id", null: false
+    t.bigint "user_id"
+    t.integer "mode", default: 0, null: false
+    t.integer "correct_count", default: 0, null: false
+    t.datetime "started_at", null: false
+    t.datetime "ended_at"
+    t.integer "total_time_seconds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_play_sessions_on_deck_id"
+    t.index ["user_id"], name: "index_play_sessions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -62,8 +88,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_24_075638) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "card_sessions", "cards"
+  add_foreign_key "card_sessions", "play_sessions"
   add_foreign_key "cards", "decks"
   add_foreign_key "cards", "users"
   add_foreign_key "decks", "users"
   add_foreign_key "hints", "cards"
+  add_foreign_key "play_sessions", "decks"
+  add_foreign_key "play_sessions", "users"
 end
