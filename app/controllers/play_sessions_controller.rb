@@ -17,7 +17,6 @@ class PlaySessionsController < ApplicationController
             flash.now[:alert] = "プレイを開始できませんでした。"
             render "decks/show", status: :unprocessable_entity
         end
-
     end
 
     # GET /decks/:deck_id/play_sessions/:id
