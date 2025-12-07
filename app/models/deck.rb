@@ -9,4 +9,20 @@ class Deck < ApplicationRecord
     belongs_to :user
     has_many :cards, dependent: :destroy
     has_many :play_sessions, dependent: :destroy
+
+    def self.ransackable_attributes(auth_object = nil)
+        %w[title]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+        []
+    end
+
+    def self.ransortable_attributes(auth_object = nil)
+        []
+    end
+
+    def self.ransackable_scopes(auth_object = nil)
+        []
+    end
 end

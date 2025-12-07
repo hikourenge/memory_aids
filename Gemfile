@@ -78,4 +78,6 @@ gem "carrierwave", "~> 3.0"
 
 gem "kaminari"
 
-gem 'kaminari-tailwind'
+gem "kaminari-tailwind"
+
+gem "ransack"
