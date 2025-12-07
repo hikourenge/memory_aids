@@ -8,5 +8,8 @@
     <div class="p-1.5 min-w-full inline-block align-middle">
         <%= render partial: 'mine', decks: @decks %>
     </div>
+    <div class = "mt-4" >
+      <%= paginate @decks, theme: 'tailwind' %>
+    </div>
   </div>
 </div>
