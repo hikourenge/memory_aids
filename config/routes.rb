@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     collection do
       get :my_decks
+      get :search_tag
     end
     resources :play_sessions, only: %i[create show] do
       member do

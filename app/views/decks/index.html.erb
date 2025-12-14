@@ -13,6 +13,16 @@
   </div>
 <% end %>
   </div>
+    <% if @tag.present? %>
+        <div class="mb-4 flex items-center justify-between">
+        <p class="text-sm text-gray-700">
+            <span class="font-semibold">「<%= @tag.name %>」</span>
+            で絞り込み中
+        </p>
+        <%= link_to "タグでの絞り込みを解除", decks_path,
+                class: "inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" %>
+        </div>
+    <% end %>
 
   <!-- デッキ一覧 -->
   <div>
@@ -24,6 +34,7 @@
         <div class="mb-3">デッキがありません</div>
     <% end %>
 </div>
+
     <div class = "mt-4" >
     <%= paginate @decks, theme: 'tailwind' %>
     </div>

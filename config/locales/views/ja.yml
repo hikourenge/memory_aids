@@ -16,6 +16,7 @@ ja:
     show:
       title: デッキ詳細
       description: 説明文
+      tag: タグ
     edit:
       title: デッキ編集
     update:
@@ -24,3 +25,5 @@ ja:
     delete:
       notice: デッキを削除しました
       alert: デッキの削除に失敗しました
+  cards:
+    index: カード一覧

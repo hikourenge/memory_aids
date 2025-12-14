@@ -16,6 +16,26 @@
           </div>
          <% end %>
         </div>
+
+      <div class="mb-6">
+        <%= form_with url: my_decks_decks_path, method: :get, local: true do |f| %>
+          <div class="flex gap-2 items-center">
+            <%= f.text_field :tag_keyword,
+                  value: @tag_keyword,
+                  placeholder: "タグ名で検索",
+                  class: "w-full rounded-md border border-gray-300 px-3 py-2 text-sm" %>
+
+            <%= f.submit "タグで絞り込み",
+                  class: "rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white" %>
+
+            <% if @tag_keyword.present? %>
+              <%= link_to "タグ絞り込み解除", my_decks_decks_path,
+                    class: "rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
    <div class="-m-1.5 overflow-x-auto">
     <div class="p-1.5 min-w-full inline-block align-middle">
         <%= render partial: 'mine', decks: @decks %>

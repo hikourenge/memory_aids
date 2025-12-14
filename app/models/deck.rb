@@ -9,6 +9,8 @@ class Deck < ApplicationRecord
     belongs_to :user
     has_many :cards, dependent: :destroy
     has_many :play_sessions, dependent: :destroy
+    has_many :decks_tags, dependent: :destroy
+    has_many :tags, through: :decks_tags
 
     def self.ransackable_attributes(auth_object = nil)
         %w[title]

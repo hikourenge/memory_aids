@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_03_053930) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_09_051218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_03_053930) do
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
+  create_table "decks_tags", force: :cascade do |t|
+    t.bigint "deck_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id", "tag_id"], name: "index_decks_tags_on_deck_id_and_tag_id", unique: true
+    t.index ["deck_id"], name: "index_decks_tags_on_deck_id"
+    t.index ["tag_id"], name: "index_decks_tags_on_tag_id"
+  end
+
   create_table "hints", force: :cascade do |t|
     t.bigint "card_id"
     t.text "content", null: false
@@ -74,6 +84,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_03_053930) do
     t.index ["user_id"], name: "index_play_sessions_on_user_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -93,6 +109,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_03_053930) do
   add_foreign_key "cards", "decks"
   add_foreign_key "cards", "users"
   add_foreign_key "decks", "users"
+  add_foreign_key "decks_tags", "decks"
+  add_foreign_key "decks_tags", "tags"
   add_foreign_key "hints", "cards"
   add_foreign_key "play_sessions", "decks"
   add_foreign_key "play_sessions", "users"

@@ -5,6 +5,7 @@
               <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">サムネイル</th>
               <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">タイトル</th>
               <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">説明</th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">タグ</th>
               <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">ステータス</th>
               <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">編集・削除</th>
               <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">カード一覧</th>
@@ -26,7 +27,19 @@
                 <td class="px-6 py-4 text-sm text-gray-800">
                   <%= link_to truncate(deck.description, length: 50), deck_path(deck), class: "hover:underline" %>
                 </td>
-
+                <td class="px-6 py-4 text-sm text-gray-800">
+                  <% if deck.tags.any? %>
+                    <div class="flex flex-wrap gap-1">
+                      <% deck.tags.each do |tag| %>
+                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700">
+                          <%= tag.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <span class="text-xs text-gray-400">タグなし</span>
+                  <% end %>
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <% if deck.status_published? %>
                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">
