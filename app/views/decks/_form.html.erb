@@ -49,6 +49,15 @@
       </p>
     </div>
 
+      <div>
+        <%= f.label :name, "タグ（カンマ区切り）", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :name,
+          value: @tags,
+          placeholder: ",で区切って入力してください。",
+          class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" %>
+        <p class="mt-1 text-xs text-gray-500">同じタグは自動で重複除去されます。</p>
+      </div>
+
     <div>
       <%= f.submit t('.submit', default: "保存"),
             class: "inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white
