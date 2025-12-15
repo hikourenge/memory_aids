@@ -81,3 +81,7 @@ gem "kaminari"
 gem "kaminari-tailwind"
 
 gem "ransack"
+
+gem "letter_opener_web"
+
+gem "dotenv-rails"
