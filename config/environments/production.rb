@@ -73,6 +73,20 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
 
+  host = "memory-aids.onrender.com"
+  config.action_mailer.default_url_options = { protocol: "https", host: host }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port: 587,
+    domain: "memory-aids.onrender.com",
+    address: "smtp.gmail.com",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
