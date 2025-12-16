@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = { host: "memory-aids.onrender.com" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
@@ -81,8 +81,10 @@ Rails.application.configure do
     port: 587,
     domain: "memory-aids.onrender.com",
     address: "smtp.gmail.com",
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"],
+    user_name: ENV.fetch("GMAIL_USERNAME"),
+    password: ENV.fetch("GMAIL_PASSWORD"),
+    open_timeout: 5,
+    read_timeout: 5,
     authentication: :plain,
     enable_starttls_auto: true
   }
