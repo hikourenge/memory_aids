@@ -2,13 +2,13 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">サムネイル</th>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">タイトル</th>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">説明</th>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">タグ</th>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">ステータス</th>
-              <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">編集・削除</th>
-              <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">カード一覧</th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%=t(".deck_image") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%=t(".title") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%=t(".description") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%=t(".tag") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%=t(".status") %></th>
+              <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"><%=t(".edit") %>/<%=t(".delete") %></th>
+              <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"><%=t(".cards_index") %></th>
             </tr>
           </thead>
 
@@ -37,29 +37,36 @@
                       <% end %>
                     </div>
                   <% else %>
-                    <span class="text-xs text-gray-400">タグなし</span>
+                    <span class="text-xs text-gray-400"><%= t(".no_tags") %></span>
                   <% end %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <% if deck.status_published? %>
                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">
-                      公開
+                      <%= t(".published") %>
                     </span>
                   <% else %>
                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
-                      非公開
+                      <%= t(".hidden") %>
                     </span>
                   <% end %>
                 </td>
 
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                  <%= link_to "編集", edit_deck_path(deck), class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-hidden focus:text-blue-800 bg-blue-100" %>
+                  <%= link_to edit_deck_path(deck), 
+                    class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
+                    <%= heroicon "pencil-square", variant: "solid", class: "mr-1 h-4 w-4 text-gray-600" %>
+                    <%= t(".edit") %>
+                   <% end %>
 
-                  <%= link_to "削除", deck_path(deck), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-                    class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-hidden focus:text-red-800 ml-2 bg-red-100" %>
+                  <%= link_to deck_path(deck), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                    class: "inline-flex items-center rounded-md border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" do %>
+                    <%= heroicon "trash", variant: "solid", class: "mr-1 h-4 w-4 text-red-600" %>
+                    <%= t(".delete") %>
+                   <% end %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                  <%= link_to "カード一覧へ", deck_cards_path(deck),
+                  <%= link_to t(".cards_index"), deck_cards_path(deck),
                   class: "inline-flex items-center rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-semibold text-gray-700 hover:bg-gray-200" %>
                 </td>
               </tr>
@@ -68,7 +75,7 @@
             <% if @decks.empty? %>
               <tr>
                 <td colspan="6" class="px-6 py-4 text-sm text-gray-500">
-                  まだデッキがありません。右上の「新規作成」から追加してください。
+                  <%= no_decks %>
                 </td>
               </tr>
             <% end %>

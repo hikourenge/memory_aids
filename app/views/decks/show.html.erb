@@ -103,18 +103,18 @@
     <!-- カード -->
             <div class="mt-6 border-t pt-4">
         <div class="text-sm font-semibold text-gray-700 mb-1">
-          <%= t('.cards.index') %>
+          <%= t('.cards') %>
         </div>
         <div class="text-gray-800 leading-relaxed text-sm">
           <%= render partial: 'cards/card', collection: @cards, as: :card, locals: { deck: @deck, preview: true } %>
         <% if user_signed_in? && current_user.own?(@deck) %>
           <%= link_to new_deck_card_path(@deck),
                   class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
-              カード登録
+              <%= t(".create_new_card") %>
             <% end %>
         <% end %>
         </div>
-        <%= link_to "カード一覧へ", deck_cards_path(@deck) %>
+        <%= link_to t(".cards_index"), deck_cards_path(@deck) %>
       </div>
     </div>
   </article>

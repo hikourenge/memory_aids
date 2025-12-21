@@ -4,6 +4,10 @@ class PlaySessionsController < ApplicationController
 
     # POST /decks/:deck_id/play_sessions
     def create
+        if @deck.cards.none?
+            redirect_to deck_path(@deck), alert: "カードが0枚のデッキはプレイできません。" and return
+        end
+
         @play_session = @deck.play_sessions.new(play_session_params)
 
         @play_session.user = user_signed_in? ? current_user : nil

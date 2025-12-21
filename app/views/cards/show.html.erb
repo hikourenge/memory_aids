@@ -8,20 +8,23 @@
   <article class="rounded-lg bg-white shadow">
     <div class="p-6 space-y-6">
 
-      <!-- ① question -->
+      <!-- question -->
       <div>
         <h3 class="text-xl font-semibold text-gray-900 leading-relaxed break-words md:min-w-[50ch]">
+        <div class="mb-1 text-xl font-semibold, text-blue-700">
+          <%= t('.question') %>
+        </div>
           <%= @card.question %>
         </h3>
 
-    <!-- ② 編集・削除（所有者のみ） -->
+    <!-- 編集・削除（所有者のみ） -->
     <% if user_signed_in? && current_user.own?(@card) %>
         <div class="mt-3 flex justify-end gap-2">
         <%= link_to edit_deck_card_path(@deck, @card),
                 id: "button-edit-#{@card.id}",
                 class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
             <%= heroicon "pencil-square", variant: "solid", class: "mr-1 h-4 w-4 text-gray-600" %>
-            編集
+            <%= t('.edit') %>
         <% end %>
 
         <%= link_to deck_card_path(@deck, @card),
@@ -29,13 +32,12 @@
                 data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
                 class: "inline-flex items-center rounded-md border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" do %>
             <%= heroicon "trash", variant: "solid", class: "mr-1 h-4 w-4 text-red-600" %>
-            削除
+            <%= t('.delete') %>
         <% end %>
         </div>
 
-        <!-- ★ここから「ヒント追加UI」は所有者だけに表示 -->
         <div class="mt-4 flex justify-end gap-2">
-        <%= link_to "ヒント追加",
+        <%= link_to t(".new_hint"),
                 new_deck_card_hint_path(@deck, @card),
                 data: { turbo_frame: "hint_form" },
                 class: "inline-flex items-center rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700" %>
@@ -49,15 +51,20 @@
     <% end %>
     </div>
         <!-- ヒント一覧（追加されたらここにappendされる） -->
-    <div class="overflow-hidden rounded-lg border border-gray-200">
-    <table class="min-w-full divide-y divide-gray-200">
-        <tbody id="hints_list" class="divide-y divide-gray-200 bg-white">
-       <%= render partial: "hints/hint", collection: @hints %>
-        </tbody>
-    </table>
-    </div>
+    <% if @hints.any? %>
+      <div class="mb-1 text-xl font-bold, text-blue-700">
+        <%= t('.hints') %>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-gray-200">
+      <table class="min-w-full table-fixed divide-y divide-gray-200">
+          <tbody id="hints_list" class="divide-y divide-gray-200 bg-white">
+        <%= render partial: "hints/hint", collection: @hints %>
+          </tbody>
+      </table>
+      </div>
+    <% end %>
 
-      <!-- ③ 画像 -->
+      <!-- 画像 -->
       <% if @card.card_image? %>
         <div class="overflow-hidden rounded-lg border border-gray-200">
           <%= image_tag @card.card_image.url,
@@ -66,7 +73,7 @@
         </div>
       <% end %>
 
-      <!-- ④ answer -->
+      <!--  answer -->
       <div class="border-t pt-4">
         <div class="mb-1 text-xl font-semibold text-red-500">
           <%= t('.answer') %>
@@ -79,24 +86,24 @@
     </div>
   </article>
 
-  <!-- 前後ナビ：必ず最下部に来る -->
+  <!-- 前後ナビ -->
   <div class="mt-6 flex items-center justify-between">
     <% if @prev_card.present? %>
       <%= link_to deck_card_path(@deck, @prev_card),
             class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
-        ← 前のカード
+       <%= t('.< preview') %>
       <% end %>
     <% else %>
       <div></div>
     <% end %>
 
-    <%= link_to "カード一覧へ", deck_cards_path(@deck),
+    <%= link_to t('.cards_index'), deck_cards_path(@deck),
           class: "text-sm text-blue-600 hover:underline" %>
 
     <% if @next_card.present? %>
       <%= link_to deck_card_path(@deck, @next_card),
             class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
-        次のカード →
+       <%= t('.next >') %>
       <% end %>
     <% else %>
       <div></div>

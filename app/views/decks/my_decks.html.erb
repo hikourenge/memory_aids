@@ -1,8 +1,8 @@
 <div class="flex flex-col">
  <div class="flex items-center justify-between mb-4">
-    <h1 class="text-2xl font-semibold">作成したデッキ一覧</h1>
+    <h1 class="text-2xl font-semibold"><%= t(".title") %></h1>
 
-    <%= link_to "新規デッキを作成", new_deck_path, class: "inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg shadow-sm bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+    <%= link_to t(".create_new_deck"), new_deck_path, class: "inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg shadow-sm bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
   </div>
      <div class="mb-6 my-2">
         <%= search_form_for @q, url: my_decks_decks_path, method: :get do |f| %>

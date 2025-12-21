@@ -10,7 +10,7 @@ class PlaySession < ApplicationRecord
       deck.cards.count
     end
 
-    # 正答数（正規化のため、カラムではなく関連から計算してもOK）
+    # 正答数
     def correct_questions
       card_sessions.where(is_correct: true).count
     end

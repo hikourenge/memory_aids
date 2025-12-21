@@ -1,27 +1,27 @@
 <!-- app/views/play_sessions/result.html.erb -->
 <div class="max-w-2xl mx-auto py-8">
   <h1 class="text-2xl font-bold mb-4">
-    <%= @deck.title %> - 結果
+      <%= t(".title", deck_title: @deck.title)  %>
   </h1>
 
   <p class="mb-2">
-    正解数：<%= @play_session.correct_count %> / <%= @deck.cards.count %>
+    <%= t(".corrects") %> <%= @play_session.correct_count %> / <%= @deck.cards.count %>
   </p>
   <p class="mb-2">
-    正答率：<%= @play_session.accuracy %> %
+    <%= t(".correct_rate") %> <%= @play_session.accuracy %> %
   </p>
   <% if @play_session.total_time_seconds.present? %>
     <p class="mb-4">
-      所要時間：<%= @play_session.total_time_seconds %> 秒
+    <%= t(".times", seconds: @play_session.total_time_seconds) %>
     </p>
   <% end %>
 
   <div class="mt-6 flex gap-4">
-    <%= link_to "デッキ一覧に戻る",
+    <%= link_to t(".deck_index"),
                 decks_path,
                 class: "rounded-md bg-gray-200 px-4 py-2" %>
 
-    <%= button_to "もう一度プレイする",
+    <%= button_to t(".Once_again"),
                 deck_play_sessions_path(@deck),
                 params: { play_session: { mode: (@play_session.mode )}},
                 method: :post,

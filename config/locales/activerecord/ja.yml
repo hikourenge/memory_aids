@@ -14,6 +14,17 @@ ja:
         description: 説明文
         status: 公開設定
         deck_image: サムネイル
+        tag: タグ
       status:
         published: 公開
         hidden: 非公開
+      card:
+        question: 問題文
+        answer: 答え
+        position: 並び順
+        card_image: 問題の画像
+      hint:
+        content: 表示するヒント
+      play_session:
+        total_questions: 問題数
+        mode: プレイモード

@@ -1,3 +1,8 @@
+<%= turbo_stream.update "flash" do %>
+  <%= render "shared/flash_message" %>
+<% end %>
+
+  
   <%= turbo_stream.append "hints_list" do %>
     <%= render partial: "hints/hint", locals: { hint: @hint } %>
   <% end %>
