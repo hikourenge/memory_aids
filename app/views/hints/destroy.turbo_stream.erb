@@ -1,1 +1,6 @@
+<%= turbo_stream.update "flash"  do %>
+  <%= render "shared/flash_message" %>
+<% end %>
+
+
 <%= turbo_stream.remove "hint-#{@hint.id}" %>

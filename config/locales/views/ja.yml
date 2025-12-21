@@ -8,6 +8,25 @@ ja:
   defaults:
     edit: 編集
   decks:
+    form:
+      submit: 保存
+      no_image: 現在のサムネイルはありません
+    mine:
+      deck_image: サムネイル
+      title: タイトル
+      description: 説明文
+      status: 公開設定
+      tag: タグ
+      edit: 編集
+      delete: 削除
+      cards_index: カード一覧
+      no_tags: タグなし
+      published: 公開
+      hidden: 非公開
+      no_decks: まだデッキがありません。右上の「新規デッキを作成」から追加してください。
+    my_decks:
+      title: 作成したデッキ一覧
+      create_new_deck: 新規デッキを作成
     new:
       title: 新規デッキ作成
     create:
@@ -17,6 +36,11 @@ ja:
       title: デッキ詳細
       description: 説明文
       tag: タグ
+      cards: カード一覧
+      create_new_card: カードを追加する
+      cards_index: カード一覧へ
+      edit: 編集
+      delete: 削除
     edit:
       title: デッキ編集
     update:
@@ -25,5 +49,76 @@ ja:
     delete:
       notice: デッキを削除しました
       alert: デッキの削除に失敗しました
+    index:
+      title: デッキ一覧
+      no_decks: デッキがありません
   cards:
-    index: カード一覧
+    form:
+      submit: 保存
+      no_image: 現在の画像はありません
+      current_image: 現在の画像
+    index:
+      title: "%{deck_title}のカード一覧"
+      create new card: 新規カード登録
+      edit: 編集
+      delete: 削除
+      no_cards: カードがありません
+      return deck: デッキ詳細へ戻る
+    new:
+      title: 新規カード作成
+    create:
+      notice: カードを作成しました
+      alert: カードの作成に失敗しました
+    show:
+      title: カード詳細
+      question: 問題
+      hints: ヒント
+      position: 並び順
+      answer: 答え
+      < preview: ← 前のカード
+      next >: 次のカード →
+      cards_index: カード一覧へ
+      edit: 編集
+      delete: 削除
+      new_hint: ヒントを追加
+    edit:
+      title: カード編集
+    update:
+      notice: カードを更新しました
+      alert: カードの更新に失敗しました
+    delete:
+      notice: カードを削除しました
+      alert: カードの削除に失敗しました
+  hints:
+    form:
+      submit: 保存
+      cancel: 追加をやめる
+    hint:
+      edit: 編集
+      delete: 削除
+    create:
+      notice: ヒントを作成しました
+      alert: ヒントの作成に失敗しました
+    update:
+      notice: ヒントを更新しました
+      alert: ヒントの更新に失敗しました
+    delete:
+      notice: ヒントを削除しました
+      alert: ヒントの削除に失敗しました
+  play_sessions:
+    mode:
+      mode: プレイモードを選択
+      submit: スタート
+      practice: 練習
+    show:
+      title: "%{deck_title}-練習モード"
+      correct: 正解！
+      incorrect: 間違えた
+      show_answers: 解答を見る
+    result:
+      title: "%{deck_title}-結果"
+      corrects: 正答数：
+      correct_rate: 正答率：
+      times: "所要時間：%{seconds}秒"
+      deck_index: デッキ一覧へ
+      Once_again: もう一度プレイする

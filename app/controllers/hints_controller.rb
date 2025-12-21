@@ -12,16 +12,18 @@ class HintsController < ApplicationController
 
         respond_to do |format|
           if @hint.save
+            flash.now[:notice] = t("hints.create.notice")
             format.turbo_stream
-            format.html { redirect_to deck_card_path(@deck, @card) }
+            format.html { redirect_to deck_card_path(@deck, @card), notice: t("hints.create.notice") }
+
           else
             # フォームだけ差し替えてエラー表示
+            flash.now[:alert] = t("hints.create.alert")
             format.turbo_stream do
-              render turbo_stream: turbo_stream.update(
-                "hint_form",
-                partial: "hints/form",
-                locals: { hint: @hint, card: @card }
-              )
+              render turbo_stream: [
+              turbo_stream.update("flash", partial: "shared/flash_message"),
+              turbo_stream.update("hint_form", partial: "hints/form", locals: { hint: @hint, card: @card })
+            ]
             end
             format.html { render "cards/show", status: :unprocessable_entity }
           end
@@ -38,22 +40,23 @@ class HintsController < ApplicationController
 
         respond_to do |format|
             if @hint.update(hint_params)
+              flash.now[:notice] = t("hints.update.notice")
               format.turbo_stream
               format.html do
                 redirect_to deck_card_path(@deck, @card),
-                            notice: t("hints.update.notice", default: "ヒントを更新しました")
+                            notice: t("hints.update.notice")
                 end
             else
               # バリデーションエラー時の Turbo（フォームだけ差し替え）
               format.turbo_stream do
-                render turbo_stream: turbo_stream.update(
-                  "hint_form",
-                  partial: "hints/form",
-                  locals: { hint: @hint, card: @card }
-                )
+                flash.now[:alert] = t("hints.update.alert")
+                render turbo_stream: [
+                  turbo_stream.update("flash", partial: "shared/flash_message"),
+                  turbo_stream.update("hint_form", partial: "hints/form", locals: { hint: @hint, card: @card })
+                ]
                 end
               format.html do
-                flash.now[:alert] = t("hints.update.alert", default: "ヒントを更新できませんでした")
+                flash.now[:alert] = t("hints.update.alert")
                 render :edit, status: :unprocessable_entity
                 end
             end
@@ -65,8 +68,9 @@ class HintsController < ApplicationController
         @hint.destroy!
 
         respond_to do |format|
+          flash.now[:notice] = t("hints.delete.notice")
             format.turbo_stream
-            format.html { redirect_to deck_card_path(@deck, @card), notice: "ヒントを削除しました" }
+            format.html { redirect_to deck_card_path(@deck, @card), notice: t("hints.delete.notice") }
           end
       end
 

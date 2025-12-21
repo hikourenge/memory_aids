@@ -1,12 +1,12 @@
 <div class="mx-auto max-w-5xl px-4 pt-6">
   <div class="mb-4 flex items-center justify-between">
     <h2 class="text-2xl font-bold text-gray-900">
-      <%= @deck.title %>のカード一覧
+      <%= t(".title", deck_title: @deck.title)  %>
     </h2>
   </div>
   <div>
      <% if user_signed_in? && current_user.own?(@deck) %>
-      <%= link_to "カードを新規登録", new_deck_card_path(@deck),
+      <%= link_to t(".create new card"), new_deck_card_path(@deck),
             class: "inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700" %>
     <% end %>
   </div>
@@ -16,13 +16,13 @@
       <thead class="bg-gray-50">
         <tr>
           <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase md:min-w-[50ch]">
-            問題
+            <%= t("cards.show.question") %>
           </th>
           <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-            番号（position）
+            <%= t("cards.show.position") %>
           </th>
           <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">
-            編集・削除
+            <%= t(".edit") %> / <%= t(".delete") %>
           </th>
         </tr>
       </thead>
@@ -45,12 +45,17 @@
             <!-- 編集・削除 -->
             <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
               <% if user_signed_in? && current_user.own?(card) %>
-                <%= link_to "編集", edit_deck_card_path(@deck, card),
-                      class: "inline-flex items-center gap-x-2 rounded-lg bg-blue-100 px-3 py-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800" %>
-
-                <%= link_to "削除", deck_card_path(@deck, card),
+                <%= link_to edit_deck_card_path(@deck, card),
+                      class: "inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50" do %>
+                <%= heroicon "pencil-square", variant: "solid", class: "mr-1 h-4 w-4 text-gray-600" %>
+                <%= t(".edit") %>
+                <% end %>
+                <%= link_to deck_card_path(@deck, card),
                       data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-                      class: "ml-2 inline-flex items-center gap-x-2 rounded-lg bg-red-100 px-3 py-1.5 text-sm font-semibold text-red-600 hover:text-red-800" %>
+                     class: "inline-flex items-center rounded-md border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" do %>
+                    <%= heroicon "trash", variant: "solid", class: "mr-1 h-4 w-4 text-red-600" %>
+                    <%= t(".delete") %>
+                  <% end %>
               <% else %>
                 <span class="text-sm text-gray-400">—</span>
               <% end %>
@@ -61,7 +66,7 @@
         <% if @cards.empty? %>
           <tr>
             <td colspan="3" class="px-6 py-4 text-sm text-gray-500">
-              カードがありません
+              <%= t(".no_cards") %>
             </td>
           </tr>
         <% end %>
@@ -70,6 +75,6 @@
   </div>
 
   <div class="mt-4">
-    <%= link_to "デッキ詳細へ戻る", deck_path(@deck), class: "text-sm text-blue-600 hover:underline" %>
+    <%= link_to t(".return deck"), deck_path(@deck), class: "text-sm text-blue-600 hover:underline" %>
   </div>
 </div>
